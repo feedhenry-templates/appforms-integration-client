@@ -1,0 +1,34 @@
+#jobList{
+    padding: 0px;
+}
+
+li.form-item{
+    overflow: hidden;
+}
+
+label.col-sm-2.control-label.required{
+    color: red;
+}
+
+div.jobActions {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.panel.panel-default {
+    margin:10px;
+}
+
+.content {
+    margin-top: 50px;
+}
+
+img.feedhenryLogo {
+    margin-left:auto;
+    margin-right:auto;
+    padding:5px;
+}
+
+.headerButtons {
+    padding:0px;
+}
