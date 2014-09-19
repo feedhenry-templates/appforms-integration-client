@@ -71,9 +71,7 @@ App.Router = Backbone.Router.extend({
      * All subsequent $fh.forms requests (e.g. $fh.forms.getForms) will now interact with the cloud app you specified.
      */
     App.views.alertView.show("Initialising Forms API");
-    $fh.forms.init({config: {
-      cloudHost: "https://testing-pq0beboosi94uq5hhvqfyaym-dev.ac.gen.beta.feedhenry.com"
-    }}, function(err){
+    $fh.forms.init({config: {}}, function(err){
       if(err){
         return App.views.header.show("Error Initialising Forms " + err);
       }
