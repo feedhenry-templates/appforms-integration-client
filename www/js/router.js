@@ -77,7 +77,7 @@ App.Router = Backbone.Router.extend({
       }
       App.views.alertView.hide();
       $('#form-integration-example-navbar button').hide();
-      self.listenTo(App.views.login, "login", this.listJobs);
+      self.listenTo(App.views.login, "login", self.listJobs);
     });
   },
   listJobs: function(){
