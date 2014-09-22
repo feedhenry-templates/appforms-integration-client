@@ -87,7 +87,9 @@ App.Router = Backbone.Router.extend({
 });
 
 $(function(){
-  App.router = new App.Router();
+  $fh.on('fhinit', function(err){
+    App.router = new App.Router();
+  });
 });
 
 
