@@ -1,4 +1,4 @@
-  /**
+/**
  * These helper functions allow for multiple views to load forms and submissions.
  */
 App.FormFunctions = {
@@ -74,7 +74,15 @@ App.FormFunctions = {
       //New submission model passed back if one does not exist already.
       if(form){
         //Calling newSubmission from the form model automatically associates the submission to the form.
-        return cb(null, {submission: form.newSubmission()});
+
+        var submission = form.newSubmission();
+
+        //Pre-filling values for a submission
+        //Here it is possible to add field data to a submission before it is rendered to the user.
+        //This is useful when it is necessary to add external data to a form.
+        submission = self.addSubmissionData(form, submission, function(err){
+          return cb(err, {submission: submission});
+        });
       } else {
         //No form or submission associated with the Form View.
         return cb("No form or submission associated with the Form View.");
@@ -169,5 +177,52 @@ App.FormFunctions = {
         return cb(null, {form: form, submission: downloadedSubmission});
       });
     });
+  },
+  /**
+   * Adding existing data to a submission.
+   *
+   * In this case, the "userId" and "userName" is pre-populated to the submission before rendering.
+   *
+   * We are using the field codes functionality in the studio to assign the "userId" and "userName" field codes to
+   * text fields.
+   * @param form - The form model containing fields with field codes: "userId" and "userName"
+   * @param submission - The submission model to add fields to.
+   */
+  addSubmissionData: function(form, submission, cb){
+    //Getting the relevant data from the "User" logged into the app.
+    var userId = App.views.login.user.get("userId");
+    var userName = App.views.login.user.get("userName");
+
+    var userIdField = form.getFieldModelByCode("userId");
+    var userNameField = form.getFieldModelByCode("userName");
+
+    async.series([
+      function(cb){
+        if(userIdField && userId){
+          var userFieldId = userIdField.getFieldId();
+
+          submission.addInputValue({
+            fieldId: userFieldId,
+            value: userId,
+            index: 0
+          }, cb);
+        } else {
+          cb();
+        }
+      },
+      function(cb){
+        if(userNameField && userName){
+          var userNameFieldId = userNameField.getFieldId();
+
+          submission.addInputValue({
+            fieldId: userNameFieldId,
+            value: userName,
+            index: 0
+          }, cb);
+        } else {
+          cb();
+        }
+      }
+    ], cb);
   }
 }
