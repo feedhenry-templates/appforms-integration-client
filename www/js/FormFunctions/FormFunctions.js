@@ -179,7 +179,7 @@ App.FormFunctions = {
     });
   },
   /**
-   * Adding existing data to a submission.
+   * Adding existing data to a new submission before rendering the submission to the user.
    *
    * In this case, the "userId" and "userName" is pre-populated to the submission before rendering.
    *
@@ -193,11 +193,13 @@ App.FormFunctions = {
     var userId = App.views.login.user.get("userId");
     var userName = App.views.login.user.get("userName");
 
+    //Finding the field model realted to a field code. If not found, null will be returned.
     var userIdField = form.getFieldModelByCode("userId");
     var userNameField = form.getFieldModelByCode("userName");
 
     async.series([
       function(cb){
+        //Adding the "userId" of the User to the submission if it exists.
         if(userIdField && userId){
           var userFieldId = userIdField.getFieldId();
 
@@ -211,6 +213,7 @@ App.FormFunctions = {
         }
       },
       function(cb){
+        //Adding the "userName" of the User to the submission if it exists.
         if(userNameField && userName){
           var userNameFieldId = userNameField.getFieldId();
 
