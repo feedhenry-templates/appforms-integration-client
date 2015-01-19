@@ -1,5 +1,5 @@
 {
-  "name": "Feedhenry Drag & Drop Apps Integration Client",
+  "name": "fh-dnd-integration-client",
   "private": true,
   "version": "0.1.0",
   "dependencies": {},
