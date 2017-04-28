@@ -2,8 +2,7 @@
   "name": "fh-dnd-integration-client",
   "private": true,
   "version": "0.1.0",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "grunt-contrib-clean": "~0.5.0",
     "grunt-newer": "~0.5.4",
     "grunt-rev": "~0.1.0",
@@ -13,6 +12,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt": "^0.4.4"
   },
+  "devDependencies": {},
   "engines": {
     "node": ">=0.8.0"
   },
